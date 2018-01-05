@@ -18,11 +18,6 @@ class ViewController: UIViewController {
         nameField.delegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     @IBAction func reset(_ sender: Any) {
         nameField.text = String("")
         lyricsView.text = String("")
@@ -50,7 +45,11 @@ class ViewController: UIViewController {
  
         let range = lowercaseName.rangeOfCharacter(from: vowelSet, options: [], range: lowercaseName.startIndex..<lowercaseName.endIndex)
         
-        return String(lowercaseName.suffix(from: range!.lowerBound))
+        if let fromIndex = (range?.lowerBound){
+            return String(lowercaseName.suffix(from: fromIndex))
+        } else {
+            return lowercaseName
+        }
     }
     
     func lyricsForName(lyricsTemplate: String, fullName: String) -> String {
